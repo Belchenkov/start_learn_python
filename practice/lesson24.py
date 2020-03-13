@@ -1,0 +1,40 @@
+from tkinter import ttk
+from ttkthemes import ThemedTk
+import requests
+from tkinter import messagebox
+import time
+
+API_KEY = '5e1ce895b1f7950c8267adecc8ce4989'
+API_URL = 'https://api.openweathermap.org/data/2.5/weather'
+# https://api.openweathermap.org/data/2.5/weather?appid=key&q=Saratov,ru
+
+
+def get_weather():
+    if not entry.get():
+        messagebox.showwarning('Warning', 'Введите запрос в формате city, country_code')
+    else:
+        params = {
+            "appid": API_KEY
+        }
+
+root = ThemedTk(theme="arc")
+root.geometry("500x400+1000+300")
+root.resizable(0, 0)
+root.title('Получение погоды')
+
+top_frame = ttk.Frame(root)
+top_frame.place(relx=0.5, rely=0.1, relwidth=0.9, relheight=0.1, anchor='n')
+
+entry = ttk.Entry(top_frame)
+entry.place(relwidth=0.7, relheight=1)
+
+button = ttk.Button(top_frame, text="Запрос погоды", command=get_weather)
+button.place(relx=0.7, relwidth=0.3, relheight=1)
+
+lower_frame = ttk.Frame(root)
+lower_frame.place(relx=0.5, rely=0.25, relwidth=0.9, relheight=0.6, anchor='n')
+
+label = ttk.Label(lower_frame, anchor="nw")
+label.place(relwidth=1, relheight=1)
+
+root.mainloop()
